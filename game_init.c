@@ -20,28 +20,28 @@ void initialize_players(player players[PLAYERS_NUM]){
     players[0].placable = 0;
 
     printf("\nGreen Player: Please enter your name:");
-    players[1].player_colour=RED;
-    scanf("%s",&players[0].name);
+    players[1].player_colour=GREEN;
+    scanf("%s",&players[1].name);
     players[1].captured = 0;
     players[1].placable = 0;
 }
 
 //Set Invalid Squares (where it is not possible to place stacks)
-set_invalid(square * s){
+void set_invalid(square * s){
 s->type = INVALID;
 s->stack = NULL;
 s->num_pieces = 0;
 }
 
 //Set Empty Squares (with no pieces/stacks)
-set_empty(square * s){
+void set_empty(square * s){
 s->type = VALID;
 s->stack = NULL;
 s->num_pieces = 0;
 }
 
 //Set squares  with a GREEN piece
-set_green(square * s){
+void set_green(square * s){
 s->type = VALID;
 s->stack = (piece *) malloc (sizeof(piece));
 s->stack->p_colour = GREEN;
@@ -50,7 +50,7 @@ s->num_pieces = 1;
 }
 
 //Set squares with a RED piece
-set_red(square * s){
+void set_red(square * s){
 s->type = VALID;
 s->stack = (piece *) malloc (sizeof(piece));
 s->stack->p_colour = RED;
@@ -84,7 +84,6 @@ void initialize_board(square board [BOARD_SIZE][BOARD_SIZE]){
                 }
             }
         }
-
 
     }
 

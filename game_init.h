@@ -12,7 +12,7 @@
 #define PLAYERS_NUM 2
 
 //colours that a piece can have
-typedef enum colour {
+typedef enum colour{
     RED,
     GREEN
 }colour;
