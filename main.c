@@ -18,7 +18,6 @@ int main() {
     initialize_board(board);
 
 
-
     bool turn = first_turn();
     if(turn == true)
     {
@@ -28,6 +27,7 @@ int main() {
     {
         printf("%s, the green player, goes first!\n", players[1].name);
     }
+
     turns(turn,players,board);
 
     return 0;

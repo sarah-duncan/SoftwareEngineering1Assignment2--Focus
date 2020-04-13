@@ -14,7 +14,8 @@
 //colours that a piece can have
 typedef enum colour{
     RED,
-    GREEN
+    GREEN,
+    EMPTY
 }colour;
 
 // Square types
@@ -72,7 +73,7 @@ void initialize_players(player players[PLAYERS_NUM]);
 //Function to create the board
 void initialize_board(square board[BOARD_SIZE][BOARD_SIZE]);
 
+void set_empty(square * s);
 
-
-
+void connect(square *s, square *t);
 

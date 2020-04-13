@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "game_init.h"
 
 void initialize_players(player players[PLAYERS_NUM]){
@@ -15,13 +16,19 @@ void initialize_players(player players[PLAYERS_NUM]){
     // implement here the functionality to initialize the players
     printf("Red Player: Please enter your name:");
     players[0].player_colour=RED;
-    scanf("%s",&players[0].name);
+    fgets(players[0].name,30,stdin);
+    int newline = strcspn(players[0].name,"\n");
+    printf("NEWLINE: %d",newline);
+    players[0].name[newline]='\0';
     players[0].captured = 0;
     players[0].placable = 0;
 
     printf("\nGreen Player: Please enter your name:");
     players[1].player_colour=GREEN;
-    scanf("%s",&players[1].name);
+    fgets(players[1].name,30,stdin);
+    int newline2 = strcspn(players[1].name,"\n");
+    printf("NEWLINE: %d\n",newline2);
+    players[1].name[newline2]='\0';
     players[1].captured = 0;
     players[1].placable = 0;
 }
@@ -37,6 +44,8 @@ s->num_pieces = 0;
 void set_empty(square * s){
 s->type = VALID;
 s->stack = NULL;
+//Allows for empty squares on the board
+//s->stack->p_colour = EMPTY;
 s->num_pieces = 0;
 }
 
@@ -56,6 +65,25 @@ s->stack = (piece *) malloc (sizeof(piece));
 s->stack->p_colour = RED;
 s->stack->next = NULL;
 s->num_pieces = 1;
+}
+
+void connect(square *s, square *t)
+{
+    if(t->stack!=NULL) {
+        piece *newPtr = malloc(sizeof(piece));
+        colour top = s->stack->p_colour;
+        printf("HI");
+        newPtr->p_colour = t->stack->p_colour;
+        newPtr->next = NULL;
+        t->stack->p_colour = top;
+    } else
+    {
+        t->stack = (piece *) malloc (sizeof(piece));
+        t->stack->p_colour = s->stack->p_colour;
+        t->stack->next = NULL;
+    }
+
+
 }
 
 //initializes the board
