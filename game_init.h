@@ -54,13 +54,14 @@ typedef struct piece {
 
 }piece;
 
+typedef struct piece *piece_node_ptr;
 // A Square of the board
 typedef struct square {
     // type of the square (VALID/INVALID)
     square_type type;
 
     //the piece or the top piece on the stack
-    piece * stack;
+    piece *stack;
 
     //number of pieces on the square
     int num_pieces;
@@ -76,4 +77,8 @@ void initialize_board(square board[BOARD_SIZE][BOARD_SIZE]);
 void set_empty(square * s);
 
 void connect(square *s, square *t);
+
+void  connecting_stacks(piece_node_ptr *s_stack, square *t);
+
+void print_stack(square *s);
 

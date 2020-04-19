@@ -22,6 +22,3 @@ void print_board(square board[BOARD_SIZE][BOARD_SIZE]);
 bool first_turn();
 //Runs each turn
 
-void movement(int *coordinates, square board[BOARD_SIZE][BOARD_SIZE]);
-void check_coordinates(int coordinates[2], int number_of_pieces, int new_coordinates[2]);
-int limits(int coordinates[2]);

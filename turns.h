@@ -10,9 +10,9 @@
 #include <stdbool.h>
 #include "game_init.h"
 #include "input_output.h"
+#include "pieces.h"
+#include "movement.h"
 #endif //FOCUS_TURNS_H
-
-void turns(bool turn, player player[PLAYERS_NUM], square board[BOARD_SIZE][BOARD_SIZE]);
 
 void choose_coordinates(int *coordinates,bool turn, struct square[BOARD_SIZE][BOARD_SIZE]);
 

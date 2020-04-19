@@ -11,6 +11,7 @@
 #include <string.h>
 #include "game_init.h"
 
+
 void initialize_players(player players[PLAYERS_NUM]){
 
     // implement here the functionality to initialize the players
@@ -66,25 +67,53 @@ s->stack->p_colour = RED;
 s->stack->next = NULL;
 s->num_pieces = 1;
 }
-
+//s=old t=new
 void connect(square *s, square *t)
 {
-    if(t->stack!=NULL) {
-        piece *newPtr = malloc(sizeof(piece));
-        colour top = s->stack->p_colour;
-        printf("HI");
-        newPtr->p_colour = t->stack->p_colour;
-        newPtr->next = NULL;
-        t->stack->p_colour = top;
-    } else
-    {
-        t->stack = (piece *) malloc (sizeof(piece));
-        t->stack->p_colour = s->stack->p_colour;
-        t->stack->next = NULL;
-    }
-
-
+    connecting_stacks(&s->stack,t);
+    print_stack(t);
 }
+void  connecting_stacks(piece_node_ptr *s_stack, square *t)
+{
+    piece_node_ptr current_piece = *s_stack;
+    colour *new_colour = &current_piece->p_colour;
+    colour new = *new_colour;
+    current_piece = current_piece->next;
+    if(current_piece!=NULL)
+    {
+        connecting_stacks(&current_piece, t);
+    }
+    piece_node_ptr new_piece = malloc(sizeof(piece));
+    if(new_piece!=NULL)
+    {
+        //new_piece->p_colour = current_piece->p_colour;
+
+        new_piece->p_colour= new;
+        new_piece->next = t->stack;
+        t->stack=new_piece;
+    }
+}
+void print_stack(square *s)
+{
+    square temp;
+    temp = *s;
+    int num = temp.num_pieces;
+    printf("num=%d",num);
+    printf("Stack:\n");
+    while(temp.stack!=NULL)
+    {
+        switch(temp.stack->p_colour) {
+            case RED: printf("RED--> ");
+                break;
+            case GREEN: printf("GREEN--> ");
+                break;
+            default:
+                printf("Failure");
+        }
+        temp.stack=temp.stack->next;
+    }
+}
+
 
 //initializes the board
 void initialize_board(square board [BOARD_SIZE][BOARD_SIZE]){
@@ -117,4 +146,3 @@ void initialize_board(square board [BOARD_SIZE][BOARD_SIZE]){
 
 
 }
-
