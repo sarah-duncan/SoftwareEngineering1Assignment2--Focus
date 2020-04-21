@@ -7,7 +7,7 @@
 void check_stack(int *coordinates, square board[BOARD_SIZE][BOARD_SIZE], bool red_turn, player players[PLAYERS_NUM])
 {
 
-    while(board[coordinates[0]][coordinates[1]].num_pieces>2)
+    while(board[coordinates[0]][coordinates[1]].num_pieces>5)
     {
         piece_node_ptr previous_piece;
         piece_node_ptr current_piece = board[coordinates[0]][coordinates[1]].stack;
@@ -17,12 +17,6 @@ void check_stack(int *coordinates, square board[BOARD_SIZE][BOARD_SIZE], bool re
             current_piece = current_piece->next;
         }
        colour *removing = &current_piece->p_colour;
-       /*if(&current_piece->next!=NULL)
-       {
-            piece_node_ptr temp = current_piece;
-            previous_piece->next= current_piece->next;
-       }*/
-        printf("HIIIIIII");
        if(red_turn==true)
        {
             if(current_piece->p_colour==RED)

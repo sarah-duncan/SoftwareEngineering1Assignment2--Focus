@@ -40,6 +40,7 @@ void check_coordinates( int coordinates[2], int number_of_pieces, int new_coordi
 
     for(int j = 0; j<number_of_pieces; j++) {
         printf("Please input a direction and then press enter:");
+
         while(getchar()!='\n');
         directions=getchar();
         switch (directions)

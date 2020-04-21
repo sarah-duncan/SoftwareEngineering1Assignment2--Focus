@@ -19,7 +19,6 @@ void initialize_players(player players[PLAYERS_NUM]){
     players[0].player_colour=RED;
     fgets(players[0].name,30,stdin);
     int newline = strcspn(players[0].name,"\n");
-    printf("NEWLINE: %d",newline);
     players[0].name[newline]='\0';
     players[0].captured = 0;
     players[0].placable = 0;
@@ -28,7 +27,6 @@ void initialize_players(player players[PLAYERS_NUM]){
     players[1].player_colour=GREEN;
     fgets(players[1].name,30,stdin);
     int newline2 = strcspn(players[1].name,"\n");
-    printf("NEWLINE: %d\n",newline2);
     players[1].name[newline2]='\0';
     players[1].captured = 0;
     players[1].placable = 0;
