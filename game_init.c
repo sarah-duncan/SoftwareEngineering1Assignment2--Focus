@@ -84,8 +84,6 @@ void  connecting_stacks(piece_node_ptr *s_stack, square *t)
     piece_node_ptr new_piece = malloc(sizeof(piece));
     if(new_piece!=NULL)
     {
-        //new_piece->p_colour = current_piece->p_colour;
-
         new_piece->p_colour= new;
         new_piece->next = t->stack;
         t->stack=new_piece;
@@ -96,20 +94,21 @@ void print_stack(square *s)
     square temp;
     temp = *s;
     int num = temp.num_pieces;
-    printf("num=%d",num);
     printf("Stack:\n");
     while(temp.stack!=NULL)
     {
         switch(temp.stack->p_colour) {
-            case RED: printf("RED--> ");
+            case RED: printf("RED");
                 break;
-            case GREEN: printf("GREEN--> ");
+            case GREEN: printf("GREEN");
                 break;
             default:
                 printf("Failure");
         }
+        printf("\t\t  | \n");
         temp.stack=temp.stack->next;
     }
+    printf("END\n");
 }
 
 
@@ -139,8 +138,5 @@ void initialize_board(square board [BOARD_SIZE][BOARD_SIZE]){
                 }
             }
         }
-
     }
-
-
 }

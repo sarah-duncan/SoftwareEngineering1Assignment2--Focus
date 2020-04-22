@@ -75,6 +75,8 @@ void initialize_players(player players[PLAYERS_NUM]);
 void initialize_board(square board[BOARD_SIZE][BOARD_SIZE]);
 
 void set_empty(square * s);
+void set_red(square * s);
+void set_green(square * s);
 
 void connect(square *s, square *t);
 

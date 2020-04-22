@@ -2,21 +2,18 @@
 // Created by sarah on 17/04/2020.
 //
 #include "movement.h"
-#include "pieces.h"
 
 void movement(int *coordinates,square board[BOARD_SIZE][BOARD_SIZE],bool red_turn,struct player players[2])
 {
     printf("Coordinate:(%d,%d) can move %d spaces\n", coordinates[0],coordinates[1],board[coordinates[0]][coordinates[1]].num_pieces);
     printf("Please input where you would like the piece to move using the WASD.\n");
-    printf("w = UP\n s=DOWN\n a=LEFT\n d=RIGHT\n");
+    printf("w = UP\ns=DOWN\na=LEFT\nd=RIGHT\nx=STOP\n");
 
     int number_of_pieces =board[coordinates[0]][coordinates[1]].num_pieces;
     printf("Number of pieces: %d\n", number_of_pieces);
-    char *direction[number_of_pieces];
     int new_coordinates [2];
     new_coordinates[0]=0;
     new_coordinates[1]=0;
-    //ask_direction(direction,number_of_pieces);
 
     check_coordinates(coordinates,number_of_pieces,new_coordinates);
     printf("HERE ARE THE NEW COORDINATES(%d,%d)\n" ,new_coordinates[0],new_coordinates[1]);
@@ -30,6 +27,25 @@ void movement(int *coordinates,square board[BOARD_SIZE][BOARD_SIZE],bool red_tur
     coordinates[1]= new_coordinates[1];
 }
 
+void place(int *coordinates, square board[BOARD_SIZE][BOARD_SIZE], bool red_turn, struct player players[2])
+{
+    if(red_turn==true)
+    {
+       square placing;
+       set_red(&placing);
+       connecting_stacks(&placing.stack,&board[coordinates[0]][coordinates[1]]);
+       players[0].placable--;
+    }
+    else
+    {
+        square placing;
+        set_green(&placing);
+        connecting_stacks(&placing.stack,&board[coordinates[0]][coordinates[1]]);
+        players[1].placable--;
+    }
+    board[coordinates[0]][coordinates[1]].num_pieces++;
+    print_board(board);
+}
 void check_coordinates( int coordinates[2], int number_of_pieces, int new_coordinates[2])
 {
 
@@ -37,8 +53,8 @@ void check_coordinates( int coordinates[2], int number_of_pieces, int new_coordi
     new_coordinates[1] =coordinates[1];
     int failure=0;
     char directions;
-
-    for(int j = 0; j<number_of_pieces; j++) {
+    bool stop=false;
+    for(int j = 0; j<number_of_pieces&& stop!=true; j++) {
         printf("Please input a direction and then press enter:");
 
         while(getchar()!='\n');
@@ -67,17 +83,21 @@ void check_coordinates( int coordinates[2], int number_of_pieces, int new_coordi
                     failure=1;
                 }
                 break;
-            case's' :
+            case's':
                 new_coordinates[0] = (new_coordinates[0]) + 1;
                 if(limits(new_coordinates)==1)
                 {
                     failure=1;
                 }
                 break;
+            case 'x':
+                stop=true;
+                break;
             default :
                 failure = 1;
                 break;
         }
+
     }
     if(failure==1)
     {

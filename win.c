@@ -4,10 +4,17 @@
 
 #include "win.h"
 
-int win_condition(square board[BOARD_SIZE][BOARD_SIZE],struct player players[2])
+int win_condition(square board[BOARD_SIZE][BOARD_SIZE],struct player players[2],bool red_turn)
 {
+    int player;
+    if(red_turn==true)
+    {
+        player=0;
+    } else{
+        player=1;
+    }
     int left=check_board_stacks(board);
-    if(left==1 && (players[0].placable==0|| players[1].placable ==0))
+    if(left==1 && players[player].placable==0)
     {
         return 1;
     }

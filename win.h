@@ -9,6 +9,6 @@
 
 #include "turns.h"
 
-int win_condition(square board[BOARD_SIZE][BOARD_SIZE],struct player players[2]);
+int win_condition(square board[BOARD_SIZE][BOARD_SIZE],struct player players[2], bool red_turn);
 
 int check_board_stacks(square board[BOARD_SIZE][BOARD_SIZE]);
